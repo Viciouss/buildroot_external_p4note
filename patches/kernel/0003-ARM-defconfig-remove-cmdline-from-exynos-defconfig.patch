@@ -1,0 +1,33 @@
+From f3503cb3f5c662a495f08de689a5272579028a77 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Martin=20J=C3=BCcker?= <martin.juecker@gmail.com>
+Date: Sat, 1 Apr 2023 18:19:06 +0200
+Subject: [PATCH] ARM: defconfig: remove cmdline from exynos defconfig
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+for buildroot we want to use the device tree supplied cmd line, so
+remove the one in the exynos defconfig and use the boot loader supplied
+parameters as an extension
+
+Signed-off-by: Martin Jücker <martin.juecker@gmail.com>
+---
+ arch/arm/configs/exynos_defconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/configs/exynos_defconfig b/arch/arm/configs/exynos_defconfig
+index 31e8e0c0ee1b..528726d51fd1 100644
+--- a/arch/arm/configs/exynos_defconfig
++++ b/arch/arm/configs/exynos_defconfig
+@@ -15,7 +15,7 @@ CONFIG_HIGHMEM=y
+ CONFIG_SECCOMP=y
+ CONFIG_ARM_APPENDED_DTB=y
+ CONFIG_ARM_ATAG_DTB_COMPAT=y
+-CONFIG_CMDLINE="root=/dev/ram0 rw ramdisk=8192 initrd=0x41000000,8M console=ttySAC1,115200 init=/linuxrc mem=256M"
++CONFIG_ARM_ATAG_DTB_COMPAT_CMDLINE_EXTEND=y
+ CONFIG_CPU_FREQ=y
+ CONFIG_CPU_FREQ_STAT=y
+ CONFIG_CPU_FREQ_DEFAULT_GOV_ONDEMAND=y
+-- 
+2.34.1
+

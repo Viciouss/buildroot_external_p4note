@@ -1,0 +1,111 @@
+From 19d0a3b78f68d17255d253d8221957c8335ec03d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Martin=20J=C3=BCcker?= <martin.juecker@gmail.com>
+Date: Sun, 2 Apr 2023 19:08:01 +0200
+Subject: [PATCH] ARM: dts: exynos: add support for N8000, N8020 and buildroot
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+we need the compatibles to actually load some device specific
+configuration files, like wifi and touch
+
+Signed-off-by: Martin Jücker <martin.juecker@gmail.com>
+---
+ arch/arm/boot/dts/Makefile                    |  2 ++
+ arch/arm/boot/dts/exynos4412-p4note-n8000.dts | 23 +++++++++++++++++++
+ arch/arm/boot/dts/exynos4412-p4note-n8010.dts |  5 ++++
+ arch/arm/boot/dts/exynos4412-p4note-n8020.dts | 23 +++++++++++++++++++
+ 4 files changed, 53 insertions(+)
+ create mode 100644 arch/arm/boot/dts/exynos4412-p4note-n8000.dts
+ create mode 100644 arch/arm/boot/dts/exynos4412-p4note-n8020.dts
+
+diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
+index 6aa7dc4db2fc..130ca223dde1 100644
+--- a/arch/arm/boot/dts/Makefile
++++ b/arch/arm/boot/dts/Makefile
+@@ -222,7 +222,9 @@ dtb-$(CONFIG_ARCH_EXYNOS4) += \
+ 	exynos4412-odroidx.dtb \
+ 	exynos4412-odroidx2.dtb \
+ 	exynos4412-origen.dtb \
++	exynos4412-p4note-n8000.dtb \
+ 	exynos4412-p4note-n8010.dtb \
++	exynos4412-p4note-n8020.dtb \
+ 	exynos4412-smdk4412.dtb \
+ 	exynos4412-tiny4412.dtb \
+ 	exynos4412-trats2.dtb
+diff --git a/arch/arm/boot/dts/exynos4412-p4note-n8000.dts b/arch/arm/boot/dts/exynos4412-p4note-n8000.dts
+new file mode 100644
+index 000000000000..6e8b835234e7
+--- /dev/null
++++ b/arch/arm/boot/dts/exynos4412-p4note-n8000.dts
+@@ -0,0 +1,23 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Samsung's Galaxy Note 10.1 - N801x (wifi only version)
++ *
++ * Copyright (c) 2013 Samsung Electronics Co., Ltd.
++ *		http://www.samsung.com
++ */
++
++/dts-v1/;
++#include "exynos4412-p4note.dtsi"
++
++/ {
++	model = "Samsung Galaxy Note 10.1 (GT-N8000) based on Exynos4412";
++	compatible = "samsung,n8000", "samsung,p4note", "samsung,exynos4412", "samsung,exynos4";
++	chassis-type = "tablet";
++
++	chosen {
++		bootargs = "root=/dev/mmcblk2p9 rw init=/linuxrc earlyprintk console=ttySAC2 console=tty0";
++		stdout-path = "serial2:115200n8";
++	};
++
++	/* this is the 3g variant */
++};
+diff --git a/arch/arm/boot/dts/exynos4412-p4note-n8010.dts b/arch/arm/boot/dts/exynos4412-p4note-n8010.dts
+index 0932ec5866cc..3850c795f92d 100644
+--- a/arch/arm/boot/dts/exynos4412-p4note-n8010.dts
++++ b/arch/arm/boot/dts/exynos4412-p4note-n8010.dts
+@@ -14,5 +14,10 @@ / {
+ 	compatible = "samsung,n8010", "samsung,p4note", "samsung,exynos4412", "samsung,exynos4";
+ 	chassis-type = "tablet";
+ 
++	chosen {
++		bootargs = "root=/dev/mmcblk2p9 rw init=/linuxrc earlyprintk console=ttySAC2 console=tty0";
++		stdout-path = "serial2:115200n8";
++	};
++
+ 	/* this is the base variant without any kind of modem */
+ };
+diff --git a/arch/arm/boot/dts/exynos4412-p4note-n8020.dts b/arch/arm/boot/dts/exynos4412-p4note-n8020.dts
+new file mode 100644
+index 000000000000..360948dd6170
+--- /dev/null
++++ b/arch/arm/boot/dts/exynos4412-p4note-n8020.dts
+@@ -0,0 +1,23 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Samsung's Galaxy Note 10.1 - N801x (wifi only version)
++ *
++ * Copyright (c) 2013 Samsung Electronics Co., Ltd.
++ *		http://www.samsung.com
++ */
++
++/dts-v1/;
++#include "exynos4412-p4note.dtsi"
++
++/ {
++	model = "Samsung Galaxy Note 10.1 (GT-N8020) based on Exynos4412";
++	compatible = "samsung,n8020", "samsung,p4note", "samsung,exynos4412", "samsung,exynos4";
++	chassis-type = "tablet";
++
++	chosen {
++		bootargs = "root=/dev/mmcblk2p13 rw init=/linuxrc earlyprintk console=ttySAC2 console=tty0";
++		stdout-path = "serial2:115200n8";
++	};
++
++	/* this is the lte variant */
++};
+-- 
+2.34.1
+
