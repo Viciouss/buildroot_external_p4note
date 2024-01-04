@@ -1,6 +1,13 @@
 #!/bin/bash
 
-kernel_out=${BINARIES_DIR}/zImage.$2
+set -e
+
+# $2 contains the name of the device tree, unfortunately with the samsung
+# prefix so we first have to get rid of that
+dtb_with_prefix=$2
+dtb_no_prefix=${dtb_with_prefix:8}
+
+kernel_out=${BINARIES_DIR}/zImage.$dtb_no_prefix
 initrd_out=${BINARIES_DIR}/ext4.img.xz
 boot_image=${BINARIES_DIR}/boot.img
 

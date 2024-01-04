@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 echo "building system image"
 
 rootfs=${BINARIES_DIR}/rootfs.ext2
