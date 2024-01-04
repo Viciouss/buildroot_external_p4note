@@ -5,7 +5,7 @@
 
 # How to Use
 
-* download a copy of buildroot 2023.02 or later
+* download a copy of buildroot 2023.11 or later
 * checkout this repository
 * adjust wpa_supplicant.conf with your wifi name and password if you want to auto connect
 * go to the buildroot directory and execute the following:
